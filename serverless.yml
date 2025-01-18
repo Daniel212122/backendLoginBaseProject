@@ -83,4 +83,4 @@ package:
 
 custom:
   serverless-offline:
-    httpPort: 5000
+    httpPort: 4000

@@ -21,11 +21,11 @@ const processEvent = async (event) => {
         if (existingUser.Item) {
             return{
                 statusCode: 409,
-                body: JSON.stringify({
+                body: {
                     message: 'The email is already registered',
                     error: 'The email is already registered.',
                     statusCode:409
-                })
+                }
             };
         }else{
             const saltRounds = 10;
@@ -49,10 +49,10 @@ const processEvent = async (event) => {
             console.log("User registered:", register);
             return {
                 statusCode: 200,
-                body: JSON.stringify({
+                body: {
                     statusCode:200,
                     message: "User registered successfully"
-                })
+                }
             }
         }
 
@@ -71,7 +71,7 @@ exports.handler = async (event) => {
             statusCode: resp.statusCode,
             body: JSON.stringify({
                 message:resp.body.message,
-                error: resp.body.error || "",
+                error: resp.body.error,
                 statusCode: resp.body.statusCode
             })
         };
