@@ -1,0 +1,86 @@
+service: serverless-dynamodb-service
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  memorySize: 128
+  timeout: 10
+  environment:
+    USERS_TABLE: user
+    JWT_SECRET: Dadd2425eb63a9930def665b15d7057c1980666c69b5f853c410a76b7615c01a
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:*"
+      Resource:
+        - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.USERS_TABLE}"
+
+  httpApi:
+    cors:
+      allowedOrigins:
+        - "*"
+      allowedHeaders:
+        - "*"
+      allowedMethods:
+        - "*"
+      allowCredentials: false
+      maxAge: 2
+functions:
+  login:
+    handler: login.handler
+    timeout: 10
+    events:
+      - http:
+          path: user/login
+          method: post
+
+  register:
+    handler: register.handler
+    timeout: 10
+    events:
+      - http:
+          path: user
+          method: post
+
+  update:
+    handler: updateUser.handler
+    timeout: 10
+    events:
+      - http:
+          path: user
+          method: put
+  delete:
+    handler: deleteUser.handler
+    timeout: 10
+    events:
+      - http:
+          path: user/{email}
+          method: delete
+
+resources:
+  Resources:
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.USERS_TABLE}
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+plugins:
+  - serverless-offline
+
+package:
+  individually: true
+  include:
+    - node_modules/**
+    - handler.js
+
+custom:
+  serverless-offline:
+    httpPort: 5000

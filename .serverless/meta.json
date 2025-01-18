@@ -1,0 +1,520 @@
+{
+  "D:\\proyectosPersonales\\login\\loginServerless": {
+    "versionSfCore": null,
+    "versionFramework": "4.4.19",
+    "isWithinCompose": false,
+    "isCompose": false,
+    "composeOrgName": null,
+    "composeResolverProviders": {
+      "default-aws-credential-resolver": "<REDACTED>",
+      "self": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "service": "serverless-dynamodb-service",
+            "provider": {
+              "name": "aws",
+              "runtime": "nodejs18.x",
+              "region": "us-east-1",
+              "memorySize": 128,
+              "timeout": 10,
+              "environment": {
+                "USERS_TABLE": "user",
+                "JWT_SECRET": "<REDACTED>"
+              },
+              "iamRoleStatements": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:*"
+                  ],
+                  "Resource": [
+                    "arn:aws:dynamodb:us-east-1:*:table/user"
+                  ]
+                }
+              ],
+              "httpApi": {
+                "cors": {
+                  "allowedOrigins": [
+                    "*"
+                  ],
+                  "allowedHeaders": [
+                    "*"
+                  ],
+                  "allowedMethods": [
+                    "*"
+                  ],
+                  "allowCredentials": "<REDACTED>",
+                  "maxAge": 2
+                }
+              },
+              "stage": "dev",
+              "versionFunctions": true
+            },
+            "functions": {
+              "login": {
+                "handler": "login.handler",
+                "timeout": 10,
+                "events": [
+                  {
+                    "http": {
+                      "path": "user/login",
+                      "method": "post"
+                    }
+                  }
+                ]
+              },
+              "register": {
+                "handler": "register.handler",
+                "timeout": 10,
+                "events": [
+                  {
+                    "http": {
+                      "path": "user",
+                      "method": "post"
+                    }
+                  }
+                ]
+              },
+              "update": {
+                "handler": "updateUser.handler",
+                "timeout": 10,
+                "events": [
+                  {
+                    "http": {
+                      "path": "user",
+                      "method": "put"
+                    }
+                  }
+                ]
+              },
+              "delete": {
+                "handler": "deleteUser.handler",
+                "timeout": 10,
+                "events": [
+                  {
+                    "http": {
+                      "path": "user/{email}",
+                      "method": "delete"
+                    }
+                  }
+                ]
+              }
+            },
+            "resources": {
+              "Resources": {
+                "UsersTable": {
+                  "Type": "AWS::DynamoDB::Table",
+                  "Properties": {
+                    "TableName": "user",
+                    "AttributeDefinitions": [
+                      {
+                        "AttributeName": "email",
+                        "AttributeType": "S"
+                      }
+                    ],
+                    "KeySchema": [
+                      {
+                        "AttributeName": "email",
+                        "KeyType": "HASH"
+                      }
+                    ],
+                    "BillingMode": "PAY_PER_REQUEST"
+                  }
+                }
+              }
+            },
+            "plugins": [
+              "serverless-offline"
+            ],
+            "package": {
+              "individually": true,
+              "include": [
+                "node_modules/**",
+                "handler.js"
+              ]
+            },
+            "custom": {
+              "serverless-offline": {
+                "httpPort": 4000
+              }
+            }
+          },
+          "configFileDirPath": "D:\\proyectosPersonales\\login\\loginServerless",
+          "config": {
+            "type": "self"
+          },
+          "options": {},
+          "stage": "dev",
+          "dashboard": null,
+          "logger": {
+            "namespace": "s:core:resolver:self",
+            "prefix": null,
+            "prefixColor": null
+          },
+          "_credentialsPromise": "<REDACTED>"
+        },
+        "resolvers": {}
+      },
+      "sls": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "service": "serverless-dynamodb-service",
+            "provider": {
+              "name": "aws",
+              "runtime": "nodejs18.x",
+              "region": "us-east-1",
+              "memorySize": 128,
+              "timeout": 10,
+              "environment": {
+                "USERS_TABLE": "user",
+                "JWT_SECRET": "<REDACTED>"
+              },
+              "iamRoleStatements": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:*"
+                  ],
+                  "Resource": [
+                    "arn:aws:dynamodb:us-east-1:*:table/user"
+                  ]
+                }
+              ],
+              "httpApi": {
+                "cors": {
+                  "allowedOrigins": [
+                    "*"
+                  ],
+                  "allowedHeaders": [
+                    "*"
+                  ],
+                  "allowedMethods": [
+                    "*"
+                  ],
+                  "allowCredentials": "<REDACTED>",
+                  "maxAge": 2
+                }
+              },
+              "stage": "dev",
+              "versionFunctions": true
+            },
+            "functions": {
+              "login": {
+                "handler": "login.handler",
+                "timeout": 10,
+                "events": [
+                  {
+                    "http": {
+                      "path": "user/login",
+                      "method": "post"
+                    }
+                  }
+                ]
+              },
+              "register": {
+                "handler": "register.handler",
+                "timeout": 10,
+                "events": [
+                  {
+                    "http": {
+                      "path": "user",
+                      "method": "post"
+                    }
+                  }
+                ]
+              },
+              "update": {
+                "handler": "updateUser.handler",
+                "timeout": 10,
+                "events": [
+                  {
+                    "http": {
+                      "path": "user",
+                      "method": "put"
+                    }
+                  }
+                ]
+              },
+              "delete": {
+                "handler": "deleteUser.handler",
+                "timeout": 10,
+                "events": [
+                  {
+                    "http": {
+                      "path": "user/{email}",
+                      "method": "delete"
+                    }
+                  }
+                ]
+              }
+            },
+            "resources": {
+              "Resources": {
+                "UsersTable": {
+                  "Type": "AWS::DynamoDB::Table",
+                  "Properties": {
+                    "TableName": "user",
+                    "AttributeDefinitions": [
+                      {
+                        "AttributeName": "email",
+                        "AttributeType": "S"
+                      }
+                    ],
+                    "KeySchema": [
+                      {
+                        "AttributeName": "email",
+                        "KeyType": "HASH"
+                      }
+                    ],
+                    "BillingMode": "PAY_PER_REQUEST"
+                  }
+                }
+              }
+            },
+            "plugins": [
+              "serverless-offline"
+            ],
+            "package": {
+              "individually": true,
+              "include": [
+                "node_modules/**",
+                "handler.js"
+              ]
+            },
+            "custom": {
+              "serverless-offline": {
+                "httpPort": 4000
+              }
+            }
+          },
+          "configFileDirPath": "D:\\proyectosPersonales\\login\\loginServerless",
+          "config": {
+            "type": "sls"
+          },
+          "options": {},
+          "stage": "dev",
+          "dashboard": null,
+          "logger": {
+            "namespace": "s:core:resolver:sls",
+            "prefix": null,
+            "prefixColor": null
+          },
+          "_credentialsPromise": "<REDACTED>"
+        },
+        "resolvers": {}
+      }
+    },
+    "composeServiceName": null,
+    "servicePath": "D:\\proyectosPersonales\\login\\loginServerless",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "serverless-dynamodb-service",
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs18.x",
+        "region": "us-east-1",
+        "memorySize": 128,
+        "timeout": 10,
+        "environment": {
+          "USERS_TABLE": "user",
+          "JWT_SECRET": "<REDACTED>"
+        },
+        "iamRoleStatements": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "dynamodb:*"
+            ],
+            "Resource": [
+              "arn:aws:dynamodb:us-east-1:*:table/user"
+            ]
+          }
+        ],
+        "httpApi": {
+          "cors": {
+            "allowedOrigins": [
+              "*"
+            ],
+            "allowedHeaders": [
+              "*"
+            ],
+            "allowedMethods": [
+              "*"
+            ],
+            "allowCredentials": "<REDACTED>",
+            "maxAge": 2
+          }
+        },
+        "stage": "dev",
+        "versionFunctions": true
+      },
+      "functions": {
+        "login": {
+          "handler": "login.handler",
+          "timeout": 10,
+          "events": [
+            {
+              "http": {
+                "path": "user/login",
+                "method": "post"
+              }
+            }
+          ]
+        },
+        "register": {
+          "handler": "register.handler",
+          "timeout": 10,
+          "events": [
+            {
+              "http": {
+                "path": "user",
+                "method": "post"
+              }
+            }
+          ]
+        },
+        "update": {
+          "handler": "updateUser.handler",
+          "timeout": 10,
+          "events": [
+            {
+              "http": {
+                "path": "user",
+                "method": "put"
+              }
+            }
+          ]
+        },
+        "delete": {
+          "handler": "deleteUser.handler",
+          "timeout": 10,
+          "events": [
+            {
+              "http": {
+                "path": "user/{email}",
+                "method": "delete"
+              }
+            }
+          ]
+        }
+      },
+      "resources": {
+        "Resources": {
+          "UsersTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "user",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "email",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "email",
+                  "KeyType": "HASH"
+                }
+              ],
+              "BillingMode": "PAY_PER_REQUEST"
+            }
+          }
+        }
+      },
+      "plugins": [
+        "serverless-offline"
+      ],
+      "package": {
+        "individually": true,
+        "include": [
+          "node_modules/**",
+          "handler.js"
+        ]
+      },
+      "custom": {
+        "serverless-offline": {
+          "httpPort": 4000
+        }
+      }
+    },
+    "serviceRawFile": "service: serverless-dynamodb-service\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs18.x\r\n  region: us-east-1\r\n  memorySize: 128\r\n  timeout: 10\r\n  environment:\r\n    USERS_TABLE: user\r\n    JWT_SECRET: Dadd2425eb63a9930def665b15d7057c1980666c69b5f853c410a76b7615c01a\r\n  iamRoleStatements:\r\n    - Effect: \"Allow\"\r\n      Action:\r\n        - \"dynamodb:*\"\r\n      Resource:\r\n        - \"arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.USERS_TABLE}\"\r\n\r\n  httpApi:\r\n    cors:\r\n      allowedOrigins:\r\n        - \"*\"\r\n      allowedHeaders:\r\n        - \"*\"\r\n      allowedMethods:\r\n        - \"*\"\r\n      allowCredentials: false\r\n      maxAge: 2\r\nfunctions:\r\n  login:\r\n    handler: login.handler\r\n    timeout: 10\r\n    events:\r\n      - http:\r\n          path: user/login\r\n          method: post\r\n\r\n  register:\r\n    handler: register.handler\r\n    timeout: 10\r\n    events:\r\n      - http:\r\n          path: user\r\n          method: post\r\n\r\n  update:\r\n    handler: updateUser.handler\r\n    timeout: 10\r\n    events:\r\n      - http:\r\n          path: user\r\n          method: put\r\n  delete:\r\n    handler: deleteUser.handler\r\n    timeout: 10\r\n    events:\r\n      - http:\r\n          path: user/{email}\r\n          method: delete\r\n\r\nresources:\r\n  Resources:\r\n    UsersTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: ${self:provider.environment.USERS_TABLE}\r\n        AttributeDefinitions:\r\n          - AttributeName: email\r\n            AttributeType: S\r\n        KeySchema:\r\n          - AttributeName: email\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\nplugins:\r\n  - serverless-offline\r\n\r\npackage:\r\n  individually: true\r\n  include:\r\n    - node_modules/**\r\n    - handler.js\r\n\r\ncustom:\r\n  serverless-offline:\r\n    httpPort: 4000\r\n",
+    "command": [
+      "offline"
+    ],
+    "options": {},
+    "error": {
+      "message": "Serverless plugin \"serverless-offline\" not found. Make sure it's installed and listed in the \"plugins\" section of your serverless config file. Use the --debug flag to learn more.",
+      "stack": "ServerlessError2: Serverless plugin \"serverless-offline\" not found. Make sure it's installed and listed in the \"plugins\" section of your serverless config file. Use the --debug flag to learn more.\n    at PluginManager.resolveServicePlugins (file:///C:/Users/Daniel%20Echavarria/.serverless/releases/4.4.19/package/dist/sf-core.js:925:2671)\n    at async PluginManager.loadAllPlugins (file:///C:/Users/Daniel%20Echavarria/.serverless/releases/4.4.19/package/dist/sf-core.js:925:1293)\n    at async Serverless.init (file:///C:/Users/Daniel%20Echavarria/.serverless/releases/4.4.19/package/dist/sf-core.js:932:9985)\n    at async runFramework (file:///C:/Users/Daniel%20Echavarria/.serverless/releases/4.4.19/package/dist/sf-core.js:980:1336)\n    at async route (file:///C:/Users/Daniel%20Echavarria/.serverless/releases/4.4.19/package/dist/sf-core.js:1010:14772)\n    at async Object.run2 [as run] (file:///C:/Users/Daniel%20Echavarria/.serverless/releases/4.4.19/package/dist/sf-core.js:1010:15173)\n    at async run3 (file:///C:/Users/Daniel%20Echavarria/.serverless/releases/4.4.19/package/dist/sf-core.js:1010:16435)",
+      "code": "PLUGIN_NOT_FOUND"
+    },
+    "params": {},
+    "machineId": "388a37fd8a75b20534d7f7b6f58429e0",
+    "stage": "dev",
+    "accessKeyV2": "<REDACTED>",
+    "accessKeyV1": "<REDACTED>",
+    "orgId": "c41c5ed7-21d2-46b1-bf1a-084f16f8ffe6",
+    "orgName": "danielechavarria2",
+    "userId": "ZcJllSTpLcR3dVPG9D",
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "userName": "danielechavarria2",
+    "subscription": null,
+    "userEmail": "daniel.echavarria@aossas.com",
+    "serviceProviderAwsRegion": "us-east-1",
+    "serviceProviderAwsCredentials": "<REDACTED>",
+    "serviceProviderAwsAccountId": "471112530519",
+    "projectType": "traditional",
+    "versionSf": "4.4.19",
+    "serviceUniqueId": "arn:aws:cloudformation:us-east-1:471112530519:stack/serverless-dynamodb-service-dev/235ad8d0-c324-11ef-9f6f-0e07dea7e4d3",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:471112530519:stack/serverless-dynamodb-service-dev/235ad8d0-c324-11ef-9f6f-0e07dea7e4d3",
+    "serviceProviderAwsCfStackCreated": "2024-12-26T00:55:45.296Z",
+    "serviceProviderAwsCfStackUpdated": "2025-01-06T02:18:03.767Z",
+    "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
+    "serviceProviderAwsCfStackOutputs": [
+      {
+        "OutputKey": "DeleteLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:471112530519:function:serverless-dynamodb-service-dev-delete:2",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-dynamodb-service-dev-DeleteLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "UpdateLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:471112530519:function:serverless-dynamodb-service-dev-update:3",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-dynamodb-service-dev-UpdateLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "RegisterLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:471112530519:function:serverless-dynamodb-service-dev-register:12",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-dynamodb-service-dev-RegisterLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "LoginLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:471112530519:function:serverless-dynamodb-service-dev-login:11",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-dynamodb-service-dev-LoginLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "ServiceEndpoint",
+        "OutputValue": "https://a9ub0zdqbh.execute-api.us-east-1.amazonaws.com/dev",
+        "Description": "URL of the service endpoint",
+        "ExportName": "sls-serverless-dynamodb-service-dev-ServiceEndpoint"
+      },
+      {
+        "OutputKey": "ServerlessDeploymentBucketName",
+        "OutputValue": "serverless-framework-deployments-us-east-1-62905b8c-ed4a",
+        "ExportName": "sls-serverless-dynamodb-service-dev-ServerlessDeploymentBucketName"
+      }
+    ]
+  }
+}
